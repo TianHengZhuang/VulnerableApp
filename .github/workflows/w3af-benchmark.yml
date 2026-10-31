@@ -92,7 +92,7 @@ jobs:
           # the container runs as uid 1000; open the bind mount so it can write the report
           chmod -R a+rwx benchmarks/w3af/.scan
 
-          docker run --rm \
+          docker run --rm -t \
             --network "$NETWORK" \
             -v "$(pwd)/benchmarks/w3af/.scan:/w3af-out:rw" \
             "$W3AF_IMAGE" \
