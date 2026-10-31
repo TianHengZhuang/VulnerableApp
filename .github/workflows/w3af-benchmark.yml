@@ -102,8 +102,12 @@ jobs:
 
           echo "::notice::=== .scan dir after run ==="
           ls -la benchmarks/w3af/.scan/ | sed 's/^/::notice::/'
-          echo "::notice::=== w3af console log tail ==="
-          tail -n 120 benchmarks/w3af/w3af-console.log | sed 's/^/::notice::/'
+          echo "::notice::=== w3af console key lines ==="
+          grep -nE "error|Error|Unknown|Traceback|Exception|saved|Scan|scan|finish|vulnerab|finding|start|output|target|plugins|back|exit|Fail" benchmarks/w3af/w3af-console.log | head -n 60 | sed 's/^/::notice::/'
+          echo "::notice::=== console log total lines ==="
+          wc -l benchmarks/w3af/w3af-console.log | sed 's/^/::notice::/'
+          echo "::notice::=== console log final 30 lines ==="
+          tail -n 30 benchmarks/w3af/w3af-console.log | sed 's/^/::notice::/'
 
 
 
